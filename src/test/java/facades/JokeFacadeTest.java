@@ -89,6 +89,18 @@ class JokeFacadeTest {
     }
 
     @Test
+    public void testGetRandom() {
+        List<JokeDTO> jokes = facade.getAll();
+        assertTrue(jokes.contains(facade.getRandom()));
+    }
+
+    @Test
+    public void testGetByCategory() {
+        List<JokeDTO> jokes = facade.getCategory("Bad Puns");
+        assertEquals(2, jokes.size());
+    }
+
+    @Test
     public void testSave() {
         Joke j4 = new Joke.Builder()
                 .withJoke("A super boring joke.")

@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Random;
 
 public class JokeFacade {
     private static JokeFacade instance;
@@ -59,19 +60,56 @@ public class JokeFacade {
         return JokeDTO.toList(q.getResultList());
     }
 
+    public List<JokeDTO> getCategory(String category) {
+        EntityManager em = getEntityManager();
+
+        TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j WHERE lower(j.category) = :category", Joke.class);
+        q.setParameter("category",  category.toLowerCase());
+        return JokeDTO.toList(q.getResultList());
+    }
+
     public JokeDTO getRandom() {
         EntityManager em = getEntityManager();
 
         // Kinda botched method -- but will do?
         long count = count();
+        int random = new Random().nextInt((int) count);
         TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j", Joke.class);
-        q.setFirstResult((int) count);
-
+        q.setFirstResult(random);
+        q.setMaxResults(1);
         return new JokeDTO(q.getSingleResult());
     }
 
     public long count() {
         EntityManager em = getEntityManager();
         return em.createQuery("SELECT COUNT(j) FROM Joke j", Long.class).getSingleResult();
+    }
+
+    public boolean populate() {
+        if(count() > 0)
+            return false;
+
+        Joke j1 = new Joke.Builder()
+                .withJoke("Why did the chicken cross the road?")
+                .withAnswer("It was tired of being called a chicken.")
+                .withCategory("Dad Jokes")
+                .withSecret("I stole this joke...")
+                .build();
+        Joke j2 = new Joke.Builder()
+                .withJoke("Why was King Arthur's army too tired to fight?")
+                .withAnswer("It had too many sleepless knights.")
+                .withCategory("Bad Puns")
+                .build();
+        Joke j3 = new Joke.Builder()
+                .withJoke("Which country's capital has the fastest-growing population?")
+                .withAnswer("Ireland. Every day it's Dublin.")
+                .withCategory("Bad Puns")
+                .build();
+
+        save(j1);
+        save(j2);
+        save(j3);
+
+        return true;
     }
 }
