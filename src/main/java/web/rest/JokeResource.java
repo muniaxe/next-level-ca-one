@@ -31,7 +31,6 @@ public class JokeResource {
     public JokeResource() { }
 
     @GET
-    @Path("/")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAll() {
         List<JokeDTO> jokes = FACADE.getAll();
