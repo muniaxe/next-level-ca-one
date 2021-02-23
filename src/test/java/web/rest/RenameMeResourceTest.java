@@ -1,5 +1,6 @@
-package rest;
+package web.rest;
 
+import web.rest.ApplicationConfig;
 import entities.RenameMe;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;

@@ -1,4 +1,4 @@
-package rest;
+package web.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
