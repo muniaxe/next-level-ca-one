@@ -35,10 +35,13 @@ public class JokeFacade {
 
     public JokeDTO save(Joke joke) {
         EntityManager em = getEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(joke);
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            em.persist(joke);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
 
         return new JokeDTO(joke);
     }

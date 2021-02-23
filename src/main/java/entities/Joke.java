@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "jokes")
@@ -10,7 +11,7 @@ public class Joke {
     private Long id;
 
     private String joke;
-    private String reference;
+    private String answer;
     private String category;
 
     //Secret value not to display in DTO.
@@ -19,9 +20,9 @@ public class Joke {
     public Joke() {
     }
 
-    public Joke(String joke, String reference, String category, String secret) {
+    public Joke(String joke, String answer, String category, String secret) {
         this.joke = joke;
-        this.reference = reference;
+        this.answer = answer;
         this.category = category;
         this.secret = secret;
     }
@@ -42,12 +43,12 @@ public class Joke {
         this.joke = joke;
     }
 
-    public String getReference() {
-        return reference;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getCategory() {
@@ -66,34 +67,50 @@ public class Joke {
         this.secret = secret;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joke joke = (Joke) o;
+        return Objects.equals(id, joke.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public static class Builder {
         private String joke;
-        private String reference;
+        private String answer;
         private String category;
         private String secret;
 
-        private Builder withJoke(String joke) {
+        public Builder() {
+        }
+
+        public Builder withJoke(String joke) {
             this.joke = joke;
             return this;
         }
 
-        private Builder withSecret(String secret) {
+        public Builder withSecret(String secret) {
             this.secret = secret;
             return this;
         }
 
-        private Builder withReference(String reference) {
-            this.reference = reference;
+        public Builder withAnswer(String answer) {
+            this.answer = answer;
             return this;
         }
 
-        private Builder withCategory(String category) {
+        public Builder withCategory(String category) {
             this.category = category;
             return this;
         }
 
-        private Joke build() {
-            return new Joke(this.joke, this.reference, this.category, this.secret);
+        public Joke build() {
+            return new Joke(this.joke, this.answer, this.category, this.secret);
         }
     }
 }

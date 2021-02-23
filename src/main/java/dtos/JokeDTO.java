@@ -4,17 +4,18 @@ import entities.Joke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JokeDTO {
     private long id;
     private String joke;
-    private String reference;
+    private String answer;
     private String category;
 
     public JokeDTO(Joke j) {
         this.id = j.getId();
         this.joke = j.getJoke();
-        this.reference = j.getReference();
+        this.answer = j.getAnswer();
         this.category = j.getCategory();
     }
 
@@ -40,12 +41,12 @@ public class JokeDTO {
         this.joke = joke;
     }
 
-    public String getReference() {
-        return reference;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getCategory() {
@@ -57,11 +58,24 @@ public class JokeDTO {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JokeDTO jokeDTO = (JokeDTO) o;
+        return id == jokeDTO.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
         return "JokeDTO{" +
                 "id=" + id +
                 ", joke='" + joke + '\'' +
-                ", reference='" + reference + '\'' +
+                ", answer='" + answer + '\'' +
                 ", category='" + category + '\'' +
                 '}';
     }
