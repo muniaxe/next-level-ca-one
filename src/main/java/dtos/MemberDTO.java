@@ -13,24 +13,24 @@ import java.util.List;
  *
  * @author tha
  */
-public class RenameMeDTO {
+public class MemberDTO {
     private long id;
     private String str1;
     private String str2;
 
-    public RenameMeDTO(String dummyStr1, String dummyStr2) {
+    public MemberDTO(String dummyStr1, String dummyStr2) {
         this.str1 = dummyStr1;
         this.str2 = dummyStr2;
     }
     
-    public static List<RenameMeDTO> getDtos(List<RenameMe> rms){
-        List<RenameMeDTO> rmdtos = new ArrayList();
-        rms.forEach(rm->rmdtos.add(new RenameMeDTO(rm)));
+    public static List<MemberDTO> getDtos(List<Member> rms){
+        List<MemberDTO> rmdtos = new ArrayList();
+        rms.forEach(rm->rmdtos.add(new MemberDTO(rm)));
         return rmdtos;
     }
 
 
-    public RenameMeDTO(RenameMe rm) {
+    public MemberDTO(Member rm) {
         this.id = rm.getId();
         this.str1 = rm.getDummyStr1();
         this.str2 = rm.getDummyStr2();
