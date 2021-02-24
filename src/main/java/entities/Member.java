@@ -9,15 +9,15 @@ import javax.persistence.NamedQuery;
 
 
 @Entity
-@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from RenameMe")
-public class RenameMe implements Serializable {
+@NamedQuery(name = "Member.deleteAllRows", query = "DELETE from Member")
+public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    public RenameMe() {
+    public Member() {
     }  
     
     // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
@@ -25,7 +25,7 @@ public class RenameMe implements Serializable {
     private String dummyStr1;
     private String dummyStr2;
 
-    public RenameMe(String dummyStr1, String dummyStr2) {
+    public Member(String dummyStr1, String dummyStr2) {
         this.dummyStr1 = dummyStr1;
         this.dummyStr2 = dummyStr2;
     }
