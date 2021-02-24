@@ -29,6 +29,28 @@
 <button id="reloadButton">
     Reload Names
 </button>
+<ul>
+    <li>
+        <a href="groupcontract.html">
+            Group Contract & Individual work
+        </a>
+    </li>
+    <li>
+        <a href="jokes/jokes.jsp">
+            Jokes page by Dyrhoi
+        </a>
+    </li>
+    <li>
+        <a href="manip.html">
+            DOM Manipulation by Hvid
+        </a>
+    </li>
+    <li>
+        <a href="https://github.com/muniaxe/next-level-ca-one">
+            GitHub repo
+        </a>
+    </li>
+</ul>
 </body>
 <script>
     const _pathContext = "${pageContext.request.contextPath}";
