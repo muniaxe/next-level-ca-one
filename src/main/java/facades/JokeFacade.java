@@ -40,11 +40,10 @@ public class JokeFacade {
             em.getTransaction().begin();
             em.persist(joke);
             em.getTransaction().commit();
+            return new JokeDTO(joke);
         } finally {
             em.close();
         }
-
-        return new JokeDTO(joke);
     }
 
     public JokeDTO get(long id) {
@@ -56,33 +55,49 @@ public class JokeFacade {
     public List<JokeDTO> getAll() {
         EntityManager em = getEntityManager();
 
-        TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j", Joke.class);
-        return JokeDTO.toList(q.getResultList());
+        try {
+            TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j", Joke.class);
+            return JokeDTO.toList(q.getResultList());
+        } finally {
+            em.close();
+        }
     }
 
     public List<JokeDTO> getCategory(String category) {
         EntityManager em = getEntityManager();
 
-        TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j WHERE lower(j.category) = :category", Joke.class);
-        q.setParameter("category",  category.toLowerCase());
-        return JokeDTO.toList(q.getResultList());
+        try {
+            TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j WHERE lower(j.category) = :category", Joke.class);
+            q.setParameter("category", category.toLowerCase());
+            return JokeDTO.toList(q.getResultList());
+        } finally {
+            em.close();
+        }
     }
 
     public JokeDTO getRandom() {
         EntityManager em = getEntityManager();
 
         // Kinda botched method -- but will do?
-        long count = count();
-        int random = new Random().nextInt((int) count);
-        TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j", Joke.class);
-        q.setFirstResult(random);
-        q.setMaxResults(1);
-        return new JokeDTO(q.getSingleResult());
+        try {
+            long count = count();
+            int random = new Random().nextInt((int) count);
+            TypedQuery<Joke> q = em.createQuery("SELECT j FROM Joke j", Joke.class);
+            q.setFirstResult(random);
+            q.setMaxResults(1);
+            return new JokeDTO(q.getSingleResult());
+        } finally {
+            em.close();
+        }
     }
 
     public long count() {
         EntityManager em = getEntityManager();
-        return em.createQuery("SELECT COUNT(j) FROM Joke j", Long.class).getSingleResult();
+        try {
+            return em.createQuery("SELECT COUNT(j) FROM Joke j", Long.class).getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     public boolean populate() {
