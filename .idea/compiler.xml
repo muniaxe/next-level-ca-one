@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="devops-starter" options="-endorseddirs C:\Users\Jack\Documents\NetBeansProjects\next-level-ca-one\target/endorsed" />
+      <module name="devops-starter" options="-endorseddirs C:\Users\Mathias\Dropbox\CPHBusiness\3.Sem\CA1\next-level-ca-one\target/endorsed" />
     </option>
   </component>
 </project>

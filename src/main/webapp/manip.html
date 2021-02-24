@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plain DOM Manipulation</title>
+    <link rel="stylesheet" href="manip.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body onload="populate()">
+<div class="container" id="container">
+
+    <div class="w-100 row pb-3 pt-5" id="addName">
+        <input type="text" class="form-control col" id="boyName" placeholder="Add boy">
+        <button class="btn btn-outline-secondary col-2 mr-1" id="btnAddBoy">Add boy</button>
+        <input type="text" class="form-control col" id="girlName" placeholder="Add girl">
+        <button class="btn btn-outline-secondary col-2" id="btnAddGirl">Add girl</button>
+    </div>
+
+    <div class="input-group row w-100 pb-3" id="alterTable">
+            <button class="remove btn btn-outline-secondary col mr-1" id="btnRemoveBoy">Remove boy</button>
+            <button class="remove btn btn-outline-secondary col mr-1 " id="btnRemoveGirl">Remove girl</button>
+        <div class="pt-2 pl-2 pr-2 noselect">
+            <input class="" type="radio" id="removeFirst" name="removeFrom" value="first" checked>
+            <label class="" for="removeFirst">Remove first</label>
+            <input class="" type="radio" id="removeLast" name="removeFrom" value="last">
+            <label class="" for="removeLast">Remove last</label>
+        </div>
+        <button class="btn btn-outline-secondary col mr-1" id="btnReverse">Reverse all</button>
+        <button class="btn btn-outline-secondary col" id="btnSort">Sort all</button>
+    </div>
+
+    <div class="row w-100">
+        <table class="col mr-1" id="boys">
+            <thead>
+            <th>
+                Boys
+            </th>
+            </thead>
+            <tbody id="tableBoys">
+            </tbody>
+        </table>
+        <table class="col mr-1">
+            <thead>
+            <th>Girls</th>
+            </thead>
+            <tbody id="tableGirls">
+            </tbody>
+        </table>
+        <table class="col">
+            <thead>
+            <th>All</th>
+            </thead>
+            <tbody id="tableAll">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="manip.js"></script>
+</body>
+</html>
