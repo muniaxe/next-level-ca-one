@@ -16,12 +16,18 @@ import java.util.Arrays;
  * @author tha
  */
 public class Populator {
-    public static void populate() {
+    public static boolean populate() {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         MemberFacade fe = MemberFacade.getFacadeExample(emf);
-        fe.create(new Member("Jack Hagedorn Jensen", "cph-jj484@cphbusiness.dk", new ArrayList<>(Arrays.asList("DOTA 2", "Hunt: Showdown", "Path of Exile"))));
-        fe.create(new Member("Emil Dyrhøi Tolderlund Jørgensen", "cph-ej142@cphbusiness.dk", new ArrayList<>(Arrays.asList("WoW", "osu!", "CS:GO"))));
-        fe.create(new Member("Mathias Hvid", "cph-mh881@cphbusiness.dk", new ArrayList<>(Arrays.asList("Runescape", "CS:GO", "Diablo: All of them"))));
+        if(fe.getMemberCount() == 0) {
+            fe.create(new Member("Jack Hagedorn Jensen", "cph-jj484@cphbusiness.dk", new ArrayList<>(Arrays.asList("DOTA 2", "Hunt: Showdown", "Path of Exile"))));
+            fe.create(new Member("Emil Dyrhøi Tolderlund Jørgensen", "cph-ej142@cphbusiness.dk", new ArrayList<>(Arrays.asList("WoW", "osu!", "CS:GO"))));
+            fe.create(new Member("Mathias Hvid", "cph-mh881@cphbusiness.dk", new ArrayList<>(Arrays.asList("Runescape", "CS:GO", "Diablo: All of them"))));
+            return true;
+        }
+
+        return false;
+
     }
 
     public static void main(String[] args) {
