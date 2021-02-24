@@ -1,15 +1,17 @@
 package facades;
 
+import dtos.MemberDTO;
+import entities.Member;
+import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
-import entities.RenameMe;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
@@ -17,14 +19,18 @@ public class MemberFacadeTest {
 
     private static EntityManagerFactory emf;
     private static MemberFacade facade;
+    Member mem1;
+    Member mem2;
+    Member mem3;
 
     public MemberFacadeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
-       emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = MemberFacade.getFacadeExample(emf);
+        emf = EMF_Creator.createEntityManagerFactoryForTest();
+        facade = MemberFacade.getFacadeExample(emf);
+
     }
 
     @AfterAll
@@ -37,12 +43,16 @@ public class MemberFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        mem1 = new Member("aa", "aa@aa.aa", new ArrayList<>(Arrays.asList("a", "b")));
+        mem2 = new Member("bb", "bb@bb.bb", new ArrayList<>(Arrays.asList("c", "d")));
+        mem3 = new Member("cc", "cc@cc.cc", new ArrayList<>(Arrays.asList("e", "f")));
+
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt", "More text"));
-            em.persist(new RenameMe("aaa", "bbb"));
-
+            em.createNamedQuery("Member.deleteAllRows").executeUpdate();
+            em.persist(mem1);
+            em.persist(mem2);
+            em.persist(mem3);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -54,11 +64,32 @@ public class MemberFacadeTest {
 //        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+    void create() {
+        System.out.println("Create Test");
+        Member tmpMember = new Member("Test", "Test@Test.dk", new ArrayList<>(Arrays.asList("Test1", "Test")));
+        MemberDTO result = facade.create(tmpMember);
+        MemberDTO expResult = facade.getMemberById(result.getId());
+        assertEquals(result.getName(), expResult.getName());
+        assertEquals(result.getId(), expResult.getId());
     }
-    
 
+    @Test
+    void getById() {
+        System.out.println("Get by ID Test");
+        long id = mem1.getId();
+        MemberDTO result = new MemberDTO(mem1);
+        MemberDTO expResult = facade.getMemberById(id);
+        assertEquals(result.getId(), expResult.getId());
+    }
+
+    @Test
+    void getAll() {
+        System.out.println("Get all Test");
+        List<Member> list = new ArrayList<>();
+        list.add(mem1);
+        list.add(mem2);
+        list.add(mem3);
+        assertEquals(3, facade.getAll().size());
+    }
 }

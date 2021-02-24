@@ -5,61 +5,49 @@
  */
 package dtos;
 
-import entities.RenameMe;
+import entities.Member;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author tha
  */
 public class MemberDTO {
     private long id;
-    private String str1;
-    private String str2;
+    private String name;
+    private List<String> favoriteGames;
 
-    public MemberDTO(String dummyStr1, String dummyStr2) {
-        this.str1 = dummyStr1;
-        this.str2 = dummyStr2;
-    }
-    
-    public static List<MemberDTO> getDtos(List<Member> rms){
-        List<MemberDTO> rmdtos = new ArrayList();
-        rms.forEach(rm->rmdtos.add(new MemberDTO(rm)));
-        return rmdtos;
+    public MemberDTO(Member mem) {
+        this.id = mem.getId();
+        this.name = mem.getName();
+        this.favoriteGames = mem.getFavoriteGames();
     }
 
-
-    public MemberDTO(Member rm) {
-        this.id = rm.getId();
-        this.str1 = rm.getDummyStr1();
-        this.str2 = rm.getDummyStr2();
+    public static List<MemberDTO> getDtos(List<Member> mems) {
+        List<MemberDTO> memdtos = new ArrayList();
+        mems.forEach(mem -> memdtos.add(new MemberDTO(mem)));
+        return memdtos;
     }
 
-    public String getDummyStr1() {
-        return str1;
+    public String getName() {
+        return name;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.str1 = dummyStr1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDummyStr2() {
-        return str2;
+    public List<String> getFavoriteGames() {
+        return favoriteGames;
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.str2 = dummyStr2;
+    public void setFavoriteGames(List<String> favoriteGames) {
+        this.favoriteGames = favoriteGames;
     }
 
-    @Override
-    public String toString() {
-        return "RenameMeDTO{" + "id=" + id + ", str1=" + str1 + ", str2=" + str2 + '}';
+    public long getId() {
+        return id;
     }
-    
-    
-    
-    
-    
-    
+
 }

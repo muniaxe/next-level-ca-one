@@ -2,16 +2,15 @@ package facades;
 
 import dtos.JokeDTO;
 import entities.Joke;
-import entities.RenameMe;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JokeFacadeTest {
     private static EntityManagerFactory emf;

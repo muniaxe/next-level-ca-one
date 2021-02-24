@@ -1,11 +1,8 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import java.util.List;
+import javax.persistence.*;
 
 
 @Entity
@@ -16,18 +13,20 @@ public class Member implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    public Member() {
-    }  
-    
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-    private String dummyStr1;
-    private String dummyStr2;
 
-    public Member(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
+    public Member() {
+    }
+
+    private String name;
+    private String email;
+    @ElementCollection
+    private List<String> favoriteGames;
+
+
+    public Member(String name, String email, List<String> favoriteGames) {
+        this.name = name;
+        this.email = email;
+        this.favoriteGames = favoriteGames;
     }
 
     public Long getId() {
@@ -37,25 +36,33 @@ public class Member implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getDummyStr1() {
-        return dummyStr1;
+
+    public String getName() {
+        return name;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.dummyStr1 = dummyStr1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDummyStr2() {
-        return dummyStr2;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.dummyStr2 = dummyStr2;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
-    
 
-   
+
+    public List<String> getFavoriteGames() {
+        return favoriteGames;
+    }
+
+    public void setFavoriteGames(List<String> favoriteGames) {
+        this.favoriteGames = favoriteGames;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 }
