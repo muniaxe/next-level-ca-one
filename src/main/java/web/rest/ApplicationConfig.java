@@ -1,7 +1,7 @@
 package web.rest;
 
-import java.util.Set;
 import javax.ws.rs.core.Application;
+import java.util.Set;
 
 @javax.ws.rs.ApplicationPath("api")
 public class ApplicationConfig extends Application {
@@ -21,7 +21,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
-        resources.add(web.rest.RenameMeResource.class);
+        resources.add(web.rest.MemberResource.class);
         resources.add(JokeResource.class);
     }
     

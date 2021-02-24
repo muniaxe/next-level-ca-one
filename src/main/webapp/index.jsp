@@ -30,5 +30,8 @@
     Reload Names
 </button>
 </body>
+<script>
+    const _pathContext = "${pageContext.request.contextPath}";
+</script>
 <script src="members.js"></script>
 </html>
